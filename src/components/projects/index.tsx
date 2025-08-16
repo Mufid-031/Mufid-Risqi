@@ -8,8 +8,12 @@ import { useOutsideClick } from "@/hooks/use-outside-click";
 import { ExpandableCard } from "./expandable-card";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { containerVariants } from "./anim";
+import { Button } from "../ui/button";
 
 export const ProjectsSection = () => {
+  const [filterActive, setFilterActive] = useState<string>("all");
+  const [projectsActive, setProjectsActive] =
+    useState<typeof projects>(projects);
   const [active, setActive] = useState<
     (typeof projects)[number] | boolean | null
   >(null);
@@ -17,6 +21,17 @@ export const ProjectsSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const ctrls = useAnimation();
   const isIsView = useInView(ref, { once: true });
+
+  const handleProjectsFilter = (active: string) => {
+    setFilterActive(active);
+    if (filterActive === "all") {
+      setProjectsActive(projects);
+    } else {
+      setProjectsActive(
+        projects.filter((project) => project.type === filterActive)
+      );
+    }
+  };
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -53,7 +68,19 @@ export const ProjectsSection = () => {
       className="flex flex-col justify-center items-center"
     >
       <SparklesText className="mt-40">My Projects</SparklesText>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-40 relative">
+      <div className="flex justify-center items-center gap-5 mt-10 relative">
+        {filters.map((filter, index) => (
+          <Button
+            key={index}
+            onClick={() => handleProjectsFilter(filter.value)}
+            variant={filter.value === filterActive ? "default" : "outline"}
+            className="rounded-full text-md cursor-pointer"
+          >
+            {filter.name}
+          </Button>
+        ))}
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-20 relative">
         <Image
           src="/logo.png"
           alt="logo"
@@ -62,7 +89,7 @@ export const ProjectsSection = () => {
           className="opacity-5 w-full hover:opacity-10 transition-all duration-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0"
         />
         <ExpandableCard active={active} id={id} ref={ref} />
-        {projects.map((project, index) => (
+        {projectsActive.map((project, index) => (
           <ProjectCard
             key={index}
             id={id}
@@ -78,6 +105,25 @@ export const ProjectsSection = () => {
   );
 };
 
+const filters = [
+  {
+    name: "All",
+    value: "all",
+  },
+  {
+    name: "Web",
+    value: "web",
+  },
+  {
+    name: "Mobile",
+    value: "mobile",
+  },
+  {
+    name: "Desktop",
+    value: "desktop",
+  },
+];
+
 const projects = [
   {
     title: "RAG Chatbot",
@@ -92,6 +138,7 @@ const projects = [
       "Langchain",
       "Upstash",
     ],
+    type: "web",
   },
   {
     title: "Learning Management System",
@@ -100,6 +147,7 @@ const projects = [
     image: "",
     link: "https://example.com/project2",
     techstacks: ["TypeScript", "React", "Laravel", "Tailwind CSS"],
+    type: "web",
   },
   {
     title: "Search Engine",
@@ -108,6 +156,7 @@ const projects = [
     image: "",
     link: "https://example.com/project3",
     techstacks: ["TypeScript", "Next.js", "Tailwind CSS"],
+    type: "web",
   },
   {
     title: "NextWalls",
@@ -116,5 +165,15 @@ const projects = [
     image: "",
     link: "https://example.com/project4",
     techstacks: ["TypeScript", "Next.js", "Tailwind CSS"],
+    type: "web",
+  },
+  {
+    title: "NextSiakad",
+    description:
+      "NextSIAKAD adalah sebuah Sistem Informasi Akademik (SIAKAD) berbasis web yang dirancang untuk mendukung proses manajemen akademik di perguruan tinggi. Aplikasi ini dibangun dengan pendekatan fullstack modern yang mengintegrasikan frontend, backend, serta database secara efisien.",
+    image: "",
+    link: "https://github.com/Mufid-031/PAW_PROJECT_NEXT_Siakad",
+    techstacks: ["Laravel", "Tailwind CSS", "NestJs", "Prisma"],
+    type: "web",
   },
 ];

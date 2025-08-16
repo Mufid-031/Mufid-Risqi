@@ -3,6 +3,7 @@ import { Social } from "@/components/about/social";
 import { Exprerience } from "@/components/about/experience";
 import { Location } from "@/components/about/location";
 import { Skills } from "@/components/about/skills";
+import { Certificate } from "@/components/about/certificate";
 
 export default function About() {
   return (
@@ -11,6 +12,7 @@ export default function About() {
         <Profile />
         <Social />
         <Exprerience />
+        <Certificate />
         <Location />
         <Skills />
       </div>

@@ -37,47 +37,63 @@ export const Footer = () => {
           <div className="space-y-2">
             <h5 className="text-foreground font-bold text-xl">Links</h5>
             <div className="font-light flex flex-col gap-2">
-              <Link
-                className="text-foreground/70 hover:text-foreground"
-                href="/about"
-              >
-                About
-              </Link>
-              <Link
-                className="text-foreground/70 hover:text-foreground"
-                href="/projects"
-              >
-                Projects
-              </Link>
-              <Link
-                className="text-foreground/70 hover:text-foreground"
-                href="/contact"
-              >
-                Contact
-              </Link>
+              {links.map((link, index) => (
+                <Link
+                  key={index}
+                  href={link.href}
+                  className="text-foreground/70 hover:text-foreground"
+                >
+                  {link.name}
+                </Link>
+              ))}
             </div>
           </div>
           <div className="space-y-2">
             <h5 className="text-foreground font-bold text-xl">Connect</h5>
             <div className="font-light flex flex-col gap-2">
-              <Link
-                className="text-foreground/70 hover:text-foreground"
-                href="https://github.com/Mufid-031"
-              >
-                Github
-              </Link>
-              <Link
-                className="text-foreground/70 hover:text-foreground"
-                href="https://www.linkedin.com/in/coding-with-mufid"
-              >
-                LinkedIn
-              </Link>
+              {connects.map((connect, index) => (
+                <Link
+                  key={index}
+                  href={connect.href}
+                  className="text-foreground/70 hover:text-foreground"
+                >
+                  {connect.name}
+                </Link>
+              ))}
             </div>
           </div>
         </div>
       </div>
       <Separator className="md:mt-13 mt-5" />
-      <h6 className="text-foreground/70 text-center mt-4 text-sm">© 2025 Ahmad Mufid Risqi. All rights reserved.</h6>
+      <h6 className="text-foreground/70 text-center mt-4 text-sm">
+        © 2025 Ahmad Mufid Risqi. All rights reserved.
+      </h6>
     </footer>
   );
 };
+
+const links = [
+  {
+    name: "About",
+    href: "/about",
+  },
+  {
+    name: "Projects",
+    href: "/projects",
+  },
+  {
+    name: "Contact",
+    href: "mailto:risqimufid50@gmail.com",
+  },
+];
+
+const connects = [
+  {
+    name: "Github",
+    href: "https://github.com/Mufid-031",
+  },
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/coding-with-mufid",
+  },
+];

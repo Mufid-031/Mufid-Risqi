@@ -2,6 +2,7 @@
 
 import Magnetic from "../common/magnetic";
 import Image from "next/image";
+import Clock from "./clock";
 
 export const Header = () => {
   return (
@@ -9,6 +10,7 @@ export const Header = () => {
       <Magnetic padding={10} className="cursor-pointer">
         <Image src="/logo.png" alt="logo" width={100} height={100} />
       </Magnetic>
+      <Clock />
     </nav>
   );
 };
