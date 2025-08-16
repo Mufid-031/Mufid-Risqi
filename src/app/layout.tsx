@@ -1,22 +1,43 @@
-import type { Metadata } from "next";
+"use client";
+
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/components/theme-provider";
 import { Header } from "@/components/header";
 import { BottomNav } from "@/components/bottom-nav";
+import { AnimatePresence } from "framer-motion";
+import Preloader from "@/components/preloader";
+import { GridBackground } from "@/components/grid-background";
+import { useEffect, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Ahmad Mufid Risqi",
-  description: "Portfolio of Ahmad Mufid Risqi",
-};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [showGridBackground, setShowGridBackground] = useState(false);
+  const [isContentVisible, setIsContentVisible] = useState(false);
+
+  useEffect(() => {
+    // Matikan scroll saat loading
+    document.body.style.overflow = "hidden";
+
+    setTimeout(() => {
+      setIsLoading(false);
+      setShowGridBackground(true);
+      window.scrollTo(0, 0);
+
+      setTimeout(() => {
+        setShowGridBackground(false);
+        setIsContentVisible(true);
+        document.body.style.overflow = ""; // aktifkan scroll
+      }, 1000);
+    }, 5000);
+  }, []);
+
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
@@ -73,7 +94,16 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          {children}
+
+          {/* Preloader & GridBackground hanya render sekali */}
+          <AnimatePresence>{isLoading && <Preloader />}</AnimatePresence>
+          <AnimatePresence>
+            {showGridBackground && <GridBackground />}
+          </AnimatePresence>
+
+          {/* Konten halaman */}
+          {isContentVisible && children}
+
           <BottomNav />
         </ThemeProvider>
       </body>
