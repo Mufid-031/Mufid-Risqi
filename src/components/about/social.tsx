@@ -16,22 +16,27 @@ export const Social = () => {
   return (
     <>
       {socialIcons.map((item, index) => (
-        <MotionCard
-          key={item.name}
-          className={cn(
-            "flex items-center justify-center gap-2",
-            item.className
-          )}
-          variants={hoverCardVariants}
-          initial="initial"
-          animate="animate"
-          whileHover="hover"
-          custom={index % 2 == 0 ? -3 : 3}
+        <Link
+          key={index}
+          href={item.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full h-full"
         >
-          <Link href={item.url} target="_blank" rel="noopener noreferrer">
+          <MotionCard
+            className={cn(
+              "flex items-center justify-center gap-2 w-full h-full",
+              item.className
+            )}
+            variants={hoverCardVariants}
+            initial="initial"
+            animate="animate"
+            whileHover="hover"
+            custom={index % 2 == 0 ? -3 : 3}
+          >
             <item.icon className="w-12 h-12" />
-          </Link>
-        </MotionCard>
+          </MotionCard>
+        </Link>
       ))}
     </>
   );

@@ -7,6 +7,7 @@ import { Card } from "../ui/card";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { fadeUp } from "./anim";
 import { useEffect, useRef } from "react";
+import { FileIcon } from "lucide-react";
 
 export const Profile = () => {
   const MotionCard = motion(Card);
@@ -54,7 +55,10 @@ export const Profile = () => {
       </p>
       <Magnetic magnetStrength={20} padding={0.1}>
         <RoundedButton className="group px-6 py-3">
-          <p className="group-hover:text-muted z-10">Download CV</p>
+          <p className="group-hover:text-muted z-10 flex items-center gap-1 text-sm">
+            <FileIcon className="w-4 h-4" />
+            Download CV
+          </p>
         </RoundedButton>
       </Magnetic>
     </MotionCard>

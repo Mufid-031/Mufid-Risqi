@@ -9,7 +9,7 @@ export const fadeUp: Variants = {
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.5,
+      duration: 1,
       type: "spring",
       stiffness: 100,
       damping: 20,

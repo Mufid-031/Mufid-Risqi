@@ -1,10 +1,8 @@
 "use client";
 
 import { About } from "@/components/about";
-import { BottomNav } from "@/components/bottom-nav";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
-import { Header } from "@/components/header";
 import { Landing } from "@/components/landing";
 import { Lanyard } from "@/components/lanyard";
 import Preloader from "@/components/preloader";
@@ -90,7 +88,6 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="relative z-0"
           >
-            <Header />
             <Landing />
             <About />
             <Works />
@@ -99,7 +96,6 @@ export default function Home() {
             <Lanyard />
             <Footer />
             <ChatBot sessionId={sessionId!} />
-            <BottomNav />
           </motion.div>
         )}
       </AnimatePresence>

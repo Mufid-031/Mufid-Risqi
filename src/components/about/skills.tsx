@@ -1,12 +1,35 @@
+"use client";
+
 import { Card } from "../ui/card";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { FigmaLogoIcon, FramerLogoIcon } from "@radix-ui/react-icons";
+import { motion, useAnimation, useInView } from "framer-motion";
+import { useEffect, useRef } from "react";
 import { FaLaravel, FaVuejs } from "react-icons/fa6";
 import { RiNextjsFill, RiReactjsFill } from "react-icons/ri";
+import { fadeUp } from "./anim";
 
 export const Skills = () => {
+  const MotionCard = motion(Card);
+  const ref = useRef<HTMLDivElement | null>(null);
+  const ctrls = useAnimation();
+  const isInView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (isInView) {
+      ctrls.start("animate");
+    } else {
+      ctrls.start("initial");
+    }
+  }, [ctrls, isInView]);
+
   return (
-    <Card className="lg:col-span-3 col-span-2 rounded-xl w-full h-[15rem] p-10">
+    <MotionCard
+      ref={ref}
+      variants={fadeUp}
+      animate={ctrls}
+      className="lg:col-span-3 col-span-2 rounded-xl w-full h-[15rem] p-10"
+    >
       <div className="grid grid-cols-3 grid-rows-2 gap-5 lg:grid-cols-6 lg:grid-rows-1 justify-items-center content-center w-full h-full">
         {skillIcons.map((skill, index) => (
           <div key={index} className="flex justify-center items-center">
@@ -19,7 +42,7 @@ export const Skills = () => {
           </div>
         ))}
       </div>
-    </Card>
+    </MotionCard>
   );
 };
 
