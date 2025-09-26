@@ -53,13 +53,13 @@ const socialIcons = [
     name: "Tiktok",
     url: "https://www.tiktok.com/@codingwithmufid",
     icon: FaTiktok,
-    className: "bg-foreground text-background",
+    className: "bg-card text-foreground",
   },
   {
     name: "GitHub",
     url: "https://github.com/Mufid-031",
     icon: RiGithubFill,
-    className: "bg-foreground text-background",
+    className: "bg-card-foreground text-background",
   },
   {
     name: "LinkedIn",

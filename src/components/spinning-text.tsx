@@ -12,7 +12,8 @@ type SpinningTextProps = {
   reverse?: boolean;
   fontSize?: number;
   radius?: number;
-  transition?: Transition;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  transition?: any;
   variants?: {
     container?: Variants;
     item?: Variants;
