@@ -9,44 +9,60 @@ import Link from "next/link";
 import { ArrowUpRightFromSquare } from "lucide-react";
 import { Separator } from "../ui/separator";
 import { FloatingElement } from "../floating-element";
+import { useRouter } from "next/navigation";
+import { useTransitionPage } from "@/contexts/transition-page-context";
 
 export const Certificate = () => {
   const MotionCard = motion(Card);
   const ref = useRef<HTMLDivElement | null>(null);
   const ctrls = useAnimation();
-  const isInView = useInView(ref, { once: true });
+  const isInView = useInView(ref);
+  const { push } = useRouter();
+  const { setShowOverlay, setReadyToShow } = useTransitionPage();
+
+  const handleClick = (href: string) => {
+    setShowOverlay(true);
+    setReadyToShow(false);
+    push(href);
+  };
 
   useEffect(() => {
     if (isInView) {
       ctrls.start("animate");
+      console.log(isInView);
     } else {
       ctrls.start("initial");
+      console.log(isInView);
     }
   }, [ctrls, isInView]);
 
   return (
-    <MotionCard
-      ref={ref}
-      variants={fadeUp}
-      animate={ctrls}
-      className="lg:col-span-4 col-span-2 rounded-xl p-10"
-    >
-      <h3 className="font-bold text-muted-foreground text-xl">Certificate</h3>
-      <Separator />
-      <div className="w-full h-full flex flex-col gap-10 mt-5">
-        {certificates.map((certificate, index) => (
-          <CertificateList key={index} {...certificate} />
-        ))}
-      </div>
-      <Separator />
-      <div className="flex items-center justify-end">
-        <Button variant="link">
-          <Link href="/certificates" className="flex gap-3">
+    <motion.div ref={ref} className="lg:col-span-4 col-span-2 rounded-xl">
+      <MotionCard
+        variants={fadeUp}
+        initial="initial"
+        whileInView="animate"
+        className="p-10"
+      >
+        <h3 className="font-bold text-muted-foreground text-xl">Certificate</h3>
+        <Separator />
+        <div className="w-full h-full flex flex-col gap-10 mt-5">
+          {certificates.map((certificate, index) => (
+            <CertificateList key={index} {...certificate} />
+          ))}
+        </div>
+        <Separator />
+        <div className="flex items-center justify-end">
+          <Button
+            variant="link"
+            className="flex gap-3"
+            onClick={() => handleClick("/certificates")}
+          >
             See all <ArrowUpRightFromSquare className="w-4 h-4" />
-          </Link>
-        </Button>
-      </div>
-    </MotionCard>
+          </Button>
+        </div>
+      </MotionCard>
+    </motion.div>
   );
 };
 
@@ -61,13 +77,13 @@ const CertificateList = ({
   href: string;
   expired: string;
 }) => {
-  const ref = useRef<HTMLDivElement | null>(null);
+  const ref = useRef<HTMLAnchorElement | null>(null);
 
   return (
-    <div ref={ref} className="flex justify-between relative">
+    <Link ref={ref} href={href} className="flex justify-between relative">
       <div className="flex gap-3">
         <div className="flex flex-col gap-1">
-          <h3 className="font-bold text-md md:text-md">{name}</h3>
+          <h3 className="font-bold text-md md:text-md line-clamp-1">{name}</h3>
           <p className="text-muted-foreground text-xs md:text-sm">{company}</p>
         </div>
       </div>
@@ -75,7 +91,7 @@ const CertificateList = ({
         {expired}
       </span>
       <FloatingElement containerRef={ref} text={"See • more • details •"} />
-    </div>
+    </Link>
   );
 };
 

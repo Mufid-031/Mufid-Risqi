@@ -1,4 +1,4 @@
-import { Variants } from "framer-motion";
+import { Transition, Variants } from "framer-motion";
 
 export const containerVariants: Variants = {
   initial: {
@@ -10,4 +10,11 @@ export const containerVariants: Variants = {
       duration: 0.5,
     },
   },
+};
+
+export const transitionAnimation: Transition = {
+  duration: 0.5,
+  type: "spring",
+  stiffness: 100,
+  damping: 20,
 };

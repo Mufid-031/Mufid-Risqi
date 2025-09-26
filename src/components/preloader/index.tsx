@@ -45,7 +45,7 @@ export default function Preloader() {
       variants={slideUp}
       initial="initial"
       exit="exit"
-      className="w-screen h-screen flex justify-center items-center fixed z-50 bg-accent-foreground"
+      className="w-screen h-screen flex justify-center items-center fixed z-[99999] bg-accent-foreground"
     >
       {dimension.width > 0 && (
         <>

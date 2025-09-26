@@ -6,8 +6,13 @@ import { ProjectCard } from "./project-card";
 import Image from "next/image";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 import { ExpandableCard } from "./expandable-card";
-import { motion, useAnimation, useInView } from "framer-motion";
-import { containerVariants } from "./anim";
+import {
+  AnimatePresence,
+  motion,
+  useAnimation,
+  useInView,
+} from "framer-motion";
+import { containerVariants, transitionAnimation } from "./anim";
 import { Button } from "../ui/button";
 
 export const ProjectsSection = () => {
@@ -24,12 +29,10 @@ export const ProjectsSection = () => {
 
   const handleProjectsFilter = (active: string) => {
     setFilterActive(active);
-    if (filterActive === "all") {
+    if (active === "all") {
       setProjectsActive(projects);
     } else {
-      setProjectsActive(
-        projects.filter((project) => project.type === filterActive)
-      );
+      setProjectsActive(projects.filter((project) => project.type === active));
     }
   };
 
@@ -68,7 +71,7 @@ export const ProjectsSection = () => {
       className="flex flex-col justify-center items-center"
     >
       <SparklesText className="mt-40">My Projects</SparklesText>
-      <div className="flex justify-center items-center gap-5 mt-10 relative">
+      <div className="flex justify-center items-center gap-5 mt-10 relative z-30">
         {filters.map((filter, index) => (
           <Button
             key={index}
@@ -89,17 +92,30 @@ export const ProjectsSection = () => {
           className="opacity-5 w-full hover:opacity-10 transition-all duration-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0"
         />
         <ExpandableCard active={active} id={id} ref={ref} />
-        {projectsActive.map((project, index) => (
-          <ProjectCard
-            key={index}
-            id={id}
-            title={project.title}
-            description={project.description}
-            image={project.image}
-            techstacks={project.techstacks}
-            onClick={() => setActive(project)}
-          />
-        ))}
+        <AnimatePresence mode="sync">
+          {projectsActive.map((project, index) => (
+            <ProjectCard
+              key={index}
+              id={id}
+              title={project.title}
+              description={project.description}
+              image={project.image}
+              techstacks={project.techstacks}
+              onClick={() => setActive(project)}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+                transition: transitionAnimation,
+              }}
+              exit={{
+                opacity: 0,
+                scale: 0,
+                transition: transitionAnimation,
+              }}
+            />
+          ))}
+        </AnimatePresence>
       </div>
     </motion.div>
   );
@@ -165,7 +181,7 @@ const projects = [
     image: "",
     link: "https://example.com/project4",
     techstacks: ["TypeScript", "Next.js", "Tailwind CSS"],
-    type: "web",
+    type: "desktop",
   },
   {
     title: "NextSiakad",
@@ -174,6 +190,6 @@ const projects = [
     image: "",
     link: "https://github.com/Mufid-031/PAW_PROJECT_NEXT_Siakad",
     techstacks: ["Laravel", "Tailwind CSS", "NestJs", "Prisma"],
-    type: "web",
+    type: "mobile",
   },
 ];

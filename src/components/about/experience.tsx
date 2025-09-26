@@ -23,7 +23,7 @@ export const Exprerience = () => {
             <div className="flex gap-3">
               {/* <div className="w-14 h-14 bg-muted-foreground rounded-full"></div> */}
               <div className="flex flex-col gap-1">
-                <h3 className="font-bold text-md md:text-md">
+                <h3 className="font-bold text-md md:text-md line-clamp-1">
                   {experience.company}
                 </h3>
                 <p className="text-muted-foreground text-xs md:text-sm">

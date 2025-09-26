@@ -9,6 +9,7 @@ import { AnimatePresence } from "framer-motion";
 import Preloader from "@/components/preloader";
 import { GridBackground } from "@/components/grid-background";
 import { useEffect, useState } from "react";
+import { TransitionPageProvider } from "@/contexts/transition-page-context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -93,18 +94,20 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
+          <TransitionPageProvider>
+            <Header />
 
-          {/* Preloader & GridBackground hanya render sekali */}
-          <AnimatePresence>{isLoading && <Preloader />}</AnimatePresence>
-          <AnimatePresence>
-            {showGridBackground && <GridBackground />}
-          </AnimatePresence>
+            {/* Preloader & GridBackground hanya render sekali */}
+            <AnimatePresence>{isLoading && <Preloader />}</AnimatePresence>
+            <AnimatePresence>
+              {showGridBackground && <GridBackground />}
+            </AnimatePresence>
 
-          {/* Konten halaman */}
-          {isContentVisible && children}
+            {/* Konten halaman */}
+            {isContentVisible && children}
 
-          <BottomNav />
+            <BottomNav />
+          </TransitionPageProvider>
         </ThemeProvider>
       </body>
     </html>

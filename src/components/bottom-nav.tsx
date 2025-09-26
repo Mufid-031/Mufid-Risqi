@@ -3,13 +3,14 @@
 import {
   CalendarIcon,
   Code2Icon,
+  FileIcon,
   HomeIcon,
   MailIcon,
   UserIcon,
 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
   Tooltip,
@@ -22,6 +23,8 @@ import { Dock, DockIcon } from "@/components/ui/dock";
 import SwitchDarkMode from "./switch-dark-mode";
 import { ThemeAnimationType } from "@/hooks/use-animation-mode";
 import { useTheme } from "next-themes";
+import { useTransitionPage } from "@/contexts/transition-page-context";
+import { useRouter } from "next/navigation";
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
@@ -52,6 +55,7 @@ const DATA = {
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/about", icon: UserIcon, label: "About" },
     { href: "/projects", icon: Code2Icon, label: "Projects" },
+    { href: "/certificates", icon: FileIcon, label: "Certificates" },
   ],
   contact: {
     social: {
@@ -71,29 +75,39 @@ const DATA = {
 
 export function BottomNav() {
   const { theme, setTheme } = useTheme();
+  const { setShowOverlay, setReadyToShow } = useTransitionPage();
+
+  const { push } = useRouter();
 
   const handleDarkModeChange = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
+  const handleClick = (href: string) => {
+    setShowOverlay(true);
+    setReadyToShow(false);
+    push(href);
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center fixed bottom-5 w-full z-50">
+    <div className="flex flex-col items-center justify-center fixed bottom-5 left-1/2 -translate-x-1/2 z-50">
       <TooltipProvider>
         <Dock direction="middle" className="bg-muted shadow-xl">
           {DATA.navbar.map((item) => (
             <DockIcon key={item.label}>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link
-                    href={item.href}
+                  <Button
+                    variant="ghost"
                     aria-label={item.label}
                     className={cn(
                       buttonVariants({ variant: "ghost", size: "icon" }),
-                      "size-12 rounded-full"
+                      "size-12 rounded-full cursor-pointer"
                     )}
+                    onClick={() => handleClick(item.href)}
                   >
                     <item.icon className="size-4" />
-                  </Link>
+                  </Button>
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>{item.label}</p>
@@ -111,7 +125,7 @@ export function BottomNav() {
                     aria-label={social.name}
                     className={cn(
                       buttonVariants({ variant: "ghost", size: "icon" }),
-                      "size-12 rounded-full"
+                      "size-12 rounded-full cursor-pointer"
                     )}
                   >
                     <social.icon className="size-4" />

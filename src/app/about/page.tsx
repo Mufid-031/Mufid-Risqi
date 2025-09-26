@@ -4,11 +4,13 @@ import { Exprerience } from "@/components/about/experience";
 import { Location } from "@/components/about/location";
 import { Skills } from "@/components/about/skills";
 import { Certificate } from "@/components/about/certificate";
+import { Background } from "@/components/background";
 
 export default function About() {
   return (
     <div className="flex justify-center py-32">
-      <div className="w-[90%] lg:w-[70%] grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <Background />
+      <div className="w-[90%] lg:w-[70%] grid grid-cols-2 lg:grid-cols-4 gap-4 z-20">
         <Profile />
         <Social />
         <Exprerience />
