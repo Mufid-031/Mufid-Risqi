@@ -3,7 +3,9 @@
 import { motion, Variants } from "framer-motion";
 import { useEffect, useState } from "react";
 import CountUp from "../ui/count-up";
-import { ballVariants, slideUp } from "./anim";
+import { slideUp } from "./anim";
+import { DotLoader } from "../dot-loader";
+import { Tagline } from "../tagline";
 
 export default function Preloader() {
   const [dimension, setDimension] = useState({ width: 0, height: 0 });
@@ -61,29 +63,8 @@ export default function Preloader() {
               exit="exit"
             ></motion.path>
           </svg>
-          <motion.div className="absolute left-10 top-10 text-xl flex items-end gap-1">
-            <motion.div className="flex gap-2 items-end">
-              {[0, 1, 2].map((i) => (
-                <motion.div
-                  key={i}
-                  className="w-2 h-2 lg:w-3 lg:h-3 rounded-full bg-muted"
-                  variants={ballVariants}
-                  animate="animate"
-                  custom={i}
-                />
-              ))}
-            </motion.div>
-          </motion.div>
-          <div className="absolute bottom-20 lg:bottom-10 left-10 space-y-1 text-muted">
-            <h4 className="text-sm md:text-lg">A Selected</h4>
-            <p className="text-xs md:text-base">
-              Full Stack Web Developer & Android Developer
-            </p>
-          </div>
-          <div className="absolute bottom-20 lg:bottom-10 right-10 space-y-1 text-muted">
-            <h4 className="text-sm md:text-lg">From</h4>
-            <p className="text-xs md:text-base">Indonesia</p>
-          </div>
+          <DotLoader position="LEFT TOP" />
+          <Tagline />
         </>
       )}
     </motion.div>

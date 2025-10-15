@@ -68,7 +68,7 @@ export const ProjectsSection = () => {
       variants={containerVariants}
       initial="initial"
       animate="animate"
-      className="flex flex-col justify-center items-center"
+      className="flex flex-col justify-center items-center mb-20"
     >
       <SparklesText className="mt-40">My Projects</SparklesText>
       <div className="flex justify-center items-center gap-5 mt-10 relative z-30">

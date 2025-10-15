@@ -10,6 +10,8 @@ import {
   useState,
 } from "react";
 import gsap from "gsap";
+import { DotLoader } from "@/components/dot-loader";
+import { Tagline } from "@/components/tagline";
 
 type TransitionPageContextType = {
   showOverlay: boolean;
@@ -40,6 +42,7 @@ export function TransitionPageProvider({
       "/": "Home",
       "/about": "About",
       "/projects": "Projects",
+      "/certificates": "Certificates",
     };
 
     return map[pathname] ?? pathname.replace("/", "") ?? "";
@@ -76,9 +79,11 @@ export function TransitionPageProvider({
         {showOverlay && (
           <div
             ref={overlayRef}
-            className="w-full min-h-screen bg-primary-foreground fixed inset-0 z-[999] flex justify-center items-center text-muted-foreground capitalize text-8xl font-bold"
+            className="w-full min-h-screen bg-foreground fixed inset-0 z-[999] flex justify-center items-center text-background capitalize text-8xl font-bold"
           >
+            <DotLoader position="LEFT TOP" />
             {routeName}
+            <Tagline />
           </div>
         )}
 

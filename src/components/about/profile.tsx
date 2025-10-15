@@ -54,7 +54,7 @@ export const Profile = () => {
         learning new technologies. I enjoy building clean and functional digital
         experiences.
       </p>
-      <Magnetic padding={10}>
+      <Magnetic padding={1} magnetStrength={100}>
         <RoundedButton className="group px-6 py-3">
           <Link
             href={"/cv.pdf"}
