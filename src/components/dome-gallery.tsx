@@ -64,6 +64,10 @@ const DEFAULT_IMAGES: ImageItem[] = [
     src: "/gallery/foto-keren-7.JPG",
     alt: "Social media image",
   },
+  {
+    src: "/gallery/foto-keren-8.JPG",
+    alt: "Social media image",
+  },
 ];
 
 const DEFAULTS = {

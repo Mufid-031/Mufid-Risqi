@@ -44,7 +44,7 @@ declare module "@react-three/fiber" {
 }
 
 extend({ MeshLineGeometry, MeshLineMaterial });
-useGLTF.preload("/card.glb");
+useGLTF.preload("/card-new.glb");
 useTexture.preload("/lanyard.png");
 
 export default function Card() {
@@ -98,7 +98,7 @@ function Band({ maxSpeed = 50, minSpeed = 10 }) {
     angularDamping: 2,
     linearDamping: 2,
   };
-  const { nodes, materials }: any = useGLTF("/card.glb");
+  const { nodes, materials }: any = useGLTF("/card-new.glb");
   const texture: any = useTexture("/lanyard.png");
   const { width, height }: any = useThree((state) => state.size);
   const [curve] = useState(
