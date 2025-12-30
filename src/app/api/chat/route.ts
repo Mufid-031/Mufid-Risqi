@@ -1,94 +1,100 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { GoogleGenAI } from "@google/genai";
-import { Ratelimit } from "@upstash/ratelimit";
-import { Redis } from "@upstash/redis";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GENAI_API_KEY });
+export const runtime = "nodejs";
 
-const redis = Redis.fromEnv();
-
-const ratelimit = new Ratelimit({
-  redis: redis,
-  limiter: Ratelimit.slidingWindow(10, "1 d"), // 10 messages per day
+const ai = new GoogleGenAI({
+  apiKey: process.env.GOOGLE_GENAI_API_KEY!,
 });
 
+// ===== SIMPLE IN-MEMORY RATE LIMIT =====
+const RATE_LIMIT = 10; // requests
+const WINDOW_MS = 24 * 60 * 60 * 1000; // 1 day
+
+const ipStore = new Map<string, { count: number; startTime: number }>();
+
 export const POST = async (req: Request) => {
-  const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
-
-  const isBlocked = await redis.get(ip);
-  if (isBlocked) {
-    return new Response(
-      JSON.stringify({
-        message:
-          "You have reached the message limit for today. Install me, use your own API key, and enjoy!",
-      }),
-      {
-        status: 429,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-  }
-
   try {
-    const { success } = await ratelimit.limit(ip);
-    if (!success) {
-      await redis.set(ip, "blocked", { ex: 86400 });
-      return new Response(
-        JSON.stringify({
-          message:
-            "You have reached the message limit for today. Install me, use your own API key, and enjoy!",
-        }),
-        {
-          status: 429,
-          headers: { "Content-Type": "application/json" },
+    const ip = req.headers.get("x-forwarded-for") ?? "127.0.0.1";
+
+    const now = Date.now();
+
+    const record = ipStore.get(ip);
+
+    if (!record) {
+      ipStore.set(ip, { count: 1, startTime: now });
+    } else {
+      if (now - record.startTime > WINDOW_MS) {
+        // reset window
+        ipStore.set(ip, { count: 1, startTime: now });
+      } else {
+        if (record.count >= RATE_LIMIT) {
+          return Response.json(
+            {
+              message: "You have reached the message limit for today.",
+            },
+            { status: 429 }
+          );
         }
-      );
+        record.count++;
+      }
     }
-  } catch (error) {
-    console.error(error);
-    return new Response(
-      JSON.stringify({
-        message: "An error occurred while processing your request.",
-      }),
-      { status: 500, headers: { "Content-Type": "application/json" } }
+
+    const { messages } = await req.json();
+
+    const systemPrompt = `
+      You are Ahmad Mufid Risqi, a 5th semester Information Technology student at Universitas Trunojoyo Madura.
+
+      Personal profile:
+      - Full name: Ahmad Mufid Risqi
+      - Role: Fullstack Web Developer & Junior Mobile Developer
+      - Main stack: Next.js, React, TypeScript, Laravel, Prisma, MySQL
+      - Currently learning: Flutter for mobile development
+      - GitHub: https://github.com/Mufid-031
+      - Focus areas: Web development, API design, learning platforms, information retrieval, and AI-powered applications
+
+      Projects you have worked on include (but are not limited to):
+      - Learning Management System (LMS) with modules, progress tracking, quizzes, and role-based access
+      - RAG-based Chat Application
+      - Search Engine using TF-IDF and BM25
+      - Quiz platform with real-time leaderboard and room-based system
+      - Server management and maintenance mode system
+      - Wallpaper web application using Next.js and REST API
+
+      Guidelines for answering:
+      - Always answer as Ahmad Mufid Risqi (first-person).
+      - Be friendly, professional, and confident.
+      - If asked about projects, explain the goal, key features, and tech stack briefly.
+      - If asked for social links, provide GitHub link only unless another platform is explicitly mentioned.
+      - If asked about Instagram or other social media and no public link is provided, politely decline.
+      - Do not invent personal data, private contacts, or unverified links.
+      - Keep answers under 50 words unless more detail is necessary for clarity.
+      `.trim();
+
+    const formattedMessages = [
+      {
+        role: "user",
+        parts: [{ text: systemPrompt }],
+      },
+      ...messages.map((msg: any) => ({
+        role: msg.role === "assistant" ? "model" : "user",
+        parts: [{ text: msg.content }],
+      })),
+    ];
+
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: formattedMessages,
+    });
+
+    return Response.json({
+      message: response.text,
+    });
+  } catch (error: any) {
+    console.error("API ERROR:", error);
+    return Response.json(
+      { error: error.message ?? "Internal Server Error" },
+      { status: 500 }
     );
   }
-
-  const body = await req.json();
-  const { messages } = body;
-
-  const systemPrompt = `You are Ahmad Mufid Risqi, a 5th semester IT student at Universitas Trunojoyo Madura.
-  You are a fullstack web developer and junior mobile developer.
-  You have created multiple projects including RAG Chat, Learning Management System, Search Engine, and more.
-  Your GitHub profile is at: https://github.com/Mufid-031.
-  Your favorite technology for building modern web apps is Next.js, and you are currently learning Flutter for mobile development.
-  You must:
-  - Answer as yourself, reflecting your background and skills.
-  - Keep a friendly, professional, and confident tone.
-  - Provide clear, concise, and helpful explanations.
-  - If asked about your work, share relevant project details and tech stack.
-  - Politely decline unrelated or personal questions outside your expertise.
-  - Use up to 50 words for answers unless more detail is necessary for clarity.
-  `;
-
-  const formattedMessages = [
-    {
-      role: "user",
-      parts: [{ text: systemPrompt }],
-    },
-    ...messages.map((msg: any) => ({
-      role: msg.role === "assistant" ? "model" : "user",
-      parts: [{ text: msg.content }],
-    })),
-  ];
-
-  const botResponse = await ai.models.generateContent({
-    model: "gemini-2.5-flash",
-    contents: formattedMessages,
-  });
-
-  return new Response(JSON.stringify({ message: botResponse.text }), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
 };

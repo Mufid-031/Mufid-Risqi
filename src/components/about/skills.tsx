@@ -1,13 +1,14 @@
 "use client";
 
-import { Card } from "../ui/card";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { FigmaLogoIcon, FramerLogoIcon } from "@radix-ui/react-icons";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { FaLaravel, FaVuejs } from "react-icons/fa6";
 import { RiNextjsFill, RiReactjsFill } from "react-icons/ri";
+
 import { fadeUp } from "./anim";
+import { Card } from "../ui/card";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 export const Skills = () => {
   const MotionCard = motion(Card);

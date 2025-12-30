@@ -1,8 +1,8 @@
 "use client";
 
-import Magnetic from "../common/magnetic";
-import Image from "next/image";
 import Clock from "./clock";
+import Image from "next/image";
+import Magnetic from "../common/magnetic";
 
 export const Header = () => {
   return (

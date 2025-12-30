@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useAnimation, useInView, motion } from "framer-motion";
+
+import { fadeUp } from "./anim";
 import { Globe } from "../globe";
 import { Card } from "../ui/card";
-import { useAnimation, useInView, motion } from "framer-motion";
-import { fadeUp } from "./anim";
 
 export const Location = () => {
   const MotionCard = motion(Card);

@@ -1,13 +1,14 @@
 "use client";
 
-import { SiGmail } from "react-icons/si";
-import { Card } from "../ui/card";
+import Link from "next/link";
 import { motion } from "framer-motion";
+import { SiGmail } from "react-icons/si";
 import { FaTiktok } from "react-icons/fa6";
 import { RiGithubFill } from "react-icons/ri";
 import { LinkedInLogoIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
+
 import { hoverCardVariants } from "./anim";
+import { Card } from "../ui/card";
 import { cn } from "@/lib/utils";
 
 export const Social = () => {

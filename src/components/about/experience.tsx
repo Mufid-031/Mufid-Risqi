@@ -1,7 +1,8 @@
 "use client";
 
-import { Card } from "../ui/card";
 import { motion } from "framer-motion";
+
+import { Card } from "../ui/card";
 import { fadeUp } from "./anim";
 import { Separator } from "../ui/separator";
 

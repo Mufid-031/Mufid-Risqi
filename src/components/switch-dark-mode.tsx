@@ -21,7 +21,7 @@ const SwitchDarkMode: React.FC<SwitchDarkModeProps> = ({
 }) => {
   const { ref, toggleSwitchTheme, isDarkMode } = useModeAnimation({
     ...props,
-    isDarkMode: externalDarkMode,
+    isDarkMode: externalDarkMode, 
     onDarkModeChange,
   });
 
@@ -31,10 +31,10 @@ const SwitchDarkMode: React.FC<SwitchDarkModeProps> = ({
       onClick={toggleSwitchTheme}
       variant="ghost"
       className={cn("rounded-full cursor-pointer", className)}
-      aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+      aria-label={isDarkMode === true ? "Switch to light mode" : "Switch to dark mode"}
     >
       <span className="sr-only">
-        {isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+        {isDarkMode === true ? "Switch to light mode" : "Switch to dark mode"}
       </span>
 
       <div className="relative">{isDarkMode ? <MoonIcon /> : <SunIcon />}</div>

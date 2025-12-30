@@ -1,9 +1,10 @@
 "use client";
 
 import { QuoteIcon } from "lucide-react";
-import { motion, useAnimation, useInView } from "framer-motion";
-import { containerVariants, fadeUp } from "./anim";
 import { useEffect, useRef } from "react";
+import { motion, useAnimation, useInView } from "framer-motion";
+
+import { containerVariants, fadeUp } from "./anim";
 
 export const Quote = () => {
   const ctrls = useAnimation();

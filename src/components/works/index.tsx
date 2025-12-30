@@ -1,10 +1,10 @@
 "use client";
 
-import { Suspense, useEffect, useRef } from "react";
-import RoundedButton from "../common/rounded-button";
-import { CardWork } from "./card-work";
-import GitHubCalendar from "react-github-calendar";
+import Link from "next/link";
 import { useTheme } from "next-themes";
+import { Suspense, useEffect, useRef } from "react";
+import GitHubCalendar from "react-github-calendar";
+import { motion, useAnimation, useInView } from "framer-motion";
 import { RiNextjsFill, RiTailwindCssFill } from "react-icons/ri";
 import {
   SiLangchain,
@@ -15,9 +15,10 @@ import {
   SiTypescript,
   SiUpstash,
 } from "react-icons/si";
-import { motion, useAnimation, useInView } from "framer-motion";
+
+import RoundedButton from "../common/rounded-button";
+import { CardWork } from "./card-work";
 import { containerVariants } from "./anim";
-import Link from "next/link";
 
 export const Works = () => {
   const { theme } = useTheme();

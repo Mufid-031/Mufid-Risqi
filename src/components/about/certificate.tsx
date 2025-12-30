@@ -1,15 +1,16 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
+import { ArrowUpRightFromSquare } from "lucide-react";
 import { motion, useAnimation, useInView } from "framer-motion";
+import Link from "next/link";
+
 import { Card } from "../ui/card";
 import { fadeUp } from "./anim";
-import { useEffect, useRef } from "react";
 import { Button } from "../ui/button";
-import Link from "next/link";
-import { ArrowUpRightFromSquare } from "lucide-react";
 import { Separator } from "../ui/separator";
 import { FloatingElement } from "../floating-element";
-import { useRouter } from "next/navigation";
 import { useTransitionPage } from "@/contexts/transition-page-context";
 
 export const Certificate = () => {

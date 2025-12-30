@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { SparklesText } from "@/components/sparkle-text";
-import { CertificateCard } from "./certificate-card";
+
 import { containerVariants } from "./anim";
+import { CertificateCard } from "./certificate-card";
+import { SparklesText } from "@/components/sparkle-text";
 
 export default function CertificatesSection() {
   return (

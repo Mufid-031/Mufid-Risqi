@@ -40,7 +40,7 @@ export default function RootLayout({
   }, []);
 
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="apple-mobile-web-app-title" content="Mufid Risqi" />
         {/* Meta dasar */}

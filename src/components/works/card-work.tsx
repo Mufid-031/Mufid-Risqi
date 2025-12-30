@@ -1,5 +1,8 @@
 "use client";
 
+import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
 import {
   LegacyAnimationControls,
   motion,
@@ -7,10 +10,8 @@ import {
   useAnimation,
 } from "framer-motion";
 import { ArrowRightIcon } from "lucide-react";
-import { useState } from "react";
+
 import { arrowVariants, cardVariants, fadeLeft } from "./anim";
-import Link from "next/link";
-import Image from "next/image";
 import { IconType } from "react-icons/lib";
 import Magnetic from "../common/magnetic";
 

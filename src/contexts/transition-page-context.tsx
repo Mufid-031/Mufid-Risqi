@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import gsap from "gsap";
 import {
   createContext,
   useContext,
@@ -9,9 +9,10 @@ import {
   useRef,
   useState,
 } from "react";
-import gsap from "gsap";
-import { DotLoader } from "@/components/dot-loader";
+import { usePathname } from "next/navigation";
+
 import { Tagline } from "@/components/tagline";
+import { DotLoader } from "@/components/dot-loader";
 
 type TransitionPageContextType = {
   showOverlay: boolean;

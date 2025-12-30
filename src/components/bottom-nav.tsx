@@ -3,7 +3,7 @@
 import {
   CalendarIcon,
   Code2Icon,
-  FileIcon,
+  FileArchive,
   HomeIcon,
   MailIcon,
   UserIcon,
@@ -55,7 +55,7 @@ const DATA = {
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/about", icon: UserIcon, label: "About" },
     { href: "/projects", icon: Code2Icon, label: "Projects" },
-    { href: "/certificates", icon: FileIcon, label: "Certificates" },
+    { href: "/blog", icon: FileArchive, label: "Blog" },
   ],
   contact: {
     social: {
@@ -92,7 +92,7 @@ export function BottomNav() {
   return (
     <div className="flex flex-col items-center justify-center fixed bottom-5 left-1/2 -translate-x-1/2 z-50">
       <TooltipProvider>
-        <Dock direction="middle" className="bg-muted shadow-xl">
+        <Dock direction="middle" className="bg-muted shadow-xl relative">
           {DATA.navbar.map((item) => (
             <DockIcon key={item.label}>
               <Tooltip>
@@ -137,7 +137,6 @@ export function BottomNav() {
               </Tooltip>
             </DockIcon>
           ))}
-          <Separator orientation="vertical" className="h-full py-2" />
           <DockIcon>
             <Tooltip>
               <TooltipTrigger asChild>

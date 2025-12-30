@@ -1,5 +1,7 @@
 "use client";
 
+import { useTheme } from "next-themes";
+
 import { Profile } from "@/components/about/profile";
 import { Social } from "@/components/about/social";
 import { Exprerience } from "@/components/about/experience";
@@ -8,7 +10,6 @@ import { Skills } from "@/components/about/skills";
 import { Certificate } from "@/components/about/certificate";
 import { Background } from "@/components/background";
 import DomeGallery from "@/components/dome-gallery";
-import { useTheme } from "next-themes";
 import { Footer } from "@/components/footer";
 
 export default function About() {

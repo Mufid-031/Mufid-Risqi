@@ -1,12 +1,13 @@
 "use client";
 
 import gsap from "gsap";
+import Link from "next/link";
+import Image from "next/image";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import Image from "next/image";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import { Separator } from "../ui/separator";
-import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 export const Footer = () => {

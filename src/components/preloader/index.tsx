@@ -1,11 +1,12 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
-import { useEffect, useState } from "react";
 import CountUp from "../ui/count-up";
+import { useEffect, useState } from "react";
+import { motion, Variants } from "framer-motion";
+
 import { slideUp } from "./anim";
-import { DotLoader } from "../dot-loader";
 import { Tagline } from "../tagline";
+import { DotLoader } from "../dot-loader";
 
 export default function Preloader() {
   const [dimension, setDimension] = useState({ width: 0, height: 0 });

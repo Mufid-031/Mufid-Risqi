@@ -1,19 +1,20 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
-import { SparklesText } from "../sparkle-text";
-import { ProjectCard } from "./project-card";
 import Image from "next/image";
-import { useOutsideClick } from "@/hooks/use-outside-click";
-import { ExpandableCard } from "./expandable-card";
+import { useEffect, useId, useRef, useState } from "react";
 import {
   AnimatePresence,
   motion,
   useAnimation,
   useInView,
 } from "framer-motion";
-import { containerVariants, transitionAnimation } from "./anim";
+
 import { Button } from "../ui/button";
+import { ProjectCard } from "./project-card";
+import { SparklesText } from "../sparkle-text";
+import { ExpandableCard } from "./expandable-card";
+import { useOutsideClick } from "@/hooks/use-outside-click";
+import { containerVariants, transitionAnimation } from "./anim";
 
 export const ProjectsSection = () => {
   const [filterActive, setFilterActive] = useState<string>("all");

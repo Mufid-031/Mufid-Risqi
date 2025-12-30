@@ -1,5 +1,9 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { motion } from "framer-motion";
+
 import { About } from "@/components/about";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
@@ -8,9 +12,6 @@ import { Lanyard } from "@/components/lanyard";
 import { Quote } from "@/components/quote";
 import ChatBot from "@/components/ui/chatbot";
 import { Works } from "@/components/works";
-import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { motion } from "framer-motion";
 
 export default function Home() {
   const [sessionId, setSessionId] = useState<string | null>(null);

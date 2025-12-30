@@ -1,9 +1,10 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
 import { LucideIcon, Zap } from "lucide-react";
-import { SpinningText } from "./spinning-text";
 import { RefObject, useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+
+import { SpinningText } from "./spinning-text";
 
 export const FloatingElement = ({
   containerRef,

@@ -1,9 +1,10 @@
 import Image from "next/image";
-import Magnetic from "../common/magnetic";
-import { Card, CardContent, CardFooter } from "../ui/card";
+import { motion, MotionProps } from "framer-motion";
+
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
-import { motion, MotionProps } from "framer-motion";
+import Magnetic from "../common/magnetic";
+import { Card, CardContent, CardFooter } from "../ui/card";
 
 interface ProjectCard extends MotionProps {
   id: string;

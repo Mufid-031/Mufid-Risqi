@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { RandomLetterSwapPingPong } from "./random-letter-swap";
-import { motion, useAnimation, useInView } from "framer-motion";
-import { containerVariants, fadeUp } from "./anim";
 import { useEffect, useRef } from "react";
+import { motion, useAnimation, useInView } from "framer-motion";
+
+import { containerVariants, fadeUp } from "./anim";
+import { RandomLetterSwapPingPong } from "./random-letter-swap";
 
 export const Contact = () => {
   const ctrls = useAnimation();
@@ -17,8 +18,6 @@ export const Contact = () => {
     } else {
       ctrls.start("initial");
     }
-
-    console.log(isInView);
   }, [ctrls, isInView]);
 
   return (

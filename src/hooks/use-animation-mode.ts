@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 
+import { useIsomorphicLayoutEffect } from "./use-isomorphic-layout-effect";
+
 const isBrowser = typeof window !== "undefined";
 
 // Inject base CSS for view transitions
@@ -90,7 +92,7 @@ export const useModeAnimation = (
     : propsDuration;
 
   // Inject base styles when the hook is initialized
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     injectBaseStyles();
   }, []);
 
@@ -263,7 +265,7 @@ export const useModeAnimation = (
     }
   };
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add(globalClassName);
       localStorage.theme = "dark";

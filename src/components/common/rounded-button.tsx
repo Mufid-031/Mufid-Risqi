@@ -1,10 +1,10 @@
 "use client";
 
-import React from "react";
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
-import Magnetic from "./magnetic";
+
 import { cn } from "@/lib/utils";
+import Magnetic from "./magnetic";
 
 interface RoundedButtonProps extends React.HTMLAttributes<HTMLDivElement> {
   padding?: number;

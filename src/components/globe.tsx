@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
+import { useEffect, useRef } from "react";
 import createGlobe, { COBEOptions } from "cobe";
 import { useMotionValue, useSpring } from "framer-motion";
-import { useEffect, useRef } from "react";
 
 import { cn } from "@/lib/utils";
 

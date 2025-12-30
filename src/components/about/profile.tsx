@@ -1,14 +1,15 @@
 "use client";
 
+import Link from "next/link";
+import { useEffect, useRef } from "react";
+import { FileIcon } from "lucide-react";
+import { motion, useAnimation, useInView } from "framer-motion";
+
+import { fadeUp } from "./anim";
+import { Card } from "../ui/card";
 import Magnetic from "../common/magnetic";
 import RoundedButton from "../common/rounded-button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Card } from "../ui/card";
-import { motion, useAnimation, useInView } from "framer-motion";
-import { fadeUp } from "./anim";
-import { useEffect, useRef } from "react";
-import { FileIcon } from "lucide-react";
-import Link from "next/link";
 
 export const Profile = () => {
   const MotionCard = motion(Card);

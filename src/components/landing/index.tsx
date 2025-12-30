@@ -1,16 +1,17 @@
 "use client";
 
-import ScrollVelocity from "./scroll-velocity";
-import { ArrowDown } from "lucide-react";
-import RoundedButton from "../common/rounded-button";
-import VariableProximity from "../variable-proximity";
-import { useEffect, useRef, useState } from "react";
-import { useTheme } from "next-themes";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { imageVariants } from "./anim";
+import { useTheme } from "next-themes";
+import { ArrowDown } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+
 import Particles from "../particles";
+import { imageVariants } from "./anim";
 import { Background } from "../background";
+import ScrollVelocity from "./scroll-velocity";
+import RoundedButton from "../common/rounded-button";
+import VariableProximity from "../variable-proximity";
 
 export const Landing = () => {
   const { theme } = useTheme();
@@ -92,14 +93,14 @@ export const Landing = () => {
         </RoundedButton>
       </div>
       <Particles
-        particleColors={particlesColors}
+        speed={0.1}
         particleCount={100}
         particleSpread={10}
-        speed={0.1}
         particleBaseSize={100}
-        moveParticlesOnHover={false}
-        alphaParticles={false}
         disableRotation={false}
+        alphaParticles={false}
+        moveParticlesOnHover={false}
+        particleColors={particlesColors}
         className="pointer-events-none"
       />
     </div>
