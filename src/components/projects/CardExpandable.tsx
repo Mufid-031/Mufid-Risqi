@@ -8,7 +8,7 @@ import { Button } from "../ui/button";
 import Magnetic from "../common/magnetic";
 import { Card, CardContent, CardFooter } from "../ui/card";
 
-interface ExpandableCardProps {
+interface CardExpandableProps {
   active:
     | {
         title: string;
@@ -24,7 +24,7 @@ interface ExpandableCardProps {
   ref: React.RefObject<HTMLDivElement | null>;
 }
 
-export const ExpandableCard = ({ active, id, ref }: ExpandableCardProps) => {
+export const CardExpandable = ({ active, id, ref }: CardExpandableProps) => {
   return (
     <>
       <AnimatePresence>

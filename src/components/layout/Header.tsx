@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
+import Magnetic from "../common/magnetic";
 import { useEffect, useState } from "react";
 
-export default function Clock() {
+export default function Header() {
   const [time, setTime] = useState<string>("");
 
   useEffect(() => {
@@ -20,5 +22,12 @@ export default function Clock() {
     return () => clearInterval(interval); // cleanup
   }, []);
 
-  return <div className="text-md font-mono mr-5">{time}</div>;
+  return (
+    <header className="fixed top-0 left-0 right-0 h-24 flex justify-between items-center px-5 z-[999]">
+      <Magnetic padding={10} className="cursor-pointer">
+        <Image src="/logo.png" alt="logo" width={100} height={100} />
+      </Magnetic>
+      <div className="text-md font-mono mr-5">{time}</div>
+    </header>
+  );
 }

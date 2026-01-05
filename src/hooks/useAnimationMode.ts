@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
+import { useEffect, useRef, useState } from "react";
 
-import { useIsomorphicLayoutEffect } from "./use-isomorphic-layout-effect";
+import { useIsomorphicLayoutEffect } from "./useIsomorphicLayoutEffect";
 
 const isBrowser = typeof window !== "undefined";
 

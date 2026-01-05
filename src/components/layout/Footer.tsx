@@ -10,7 +10,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Separator } from "../ui/separator";
 
 gsap.registerPlugin(ScrollTrigger);
-export const Footer = () => {
+export default function Footer() {
   const ref = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {}, { scope: ref });
@@ -71,7 +71,7 @@ export const Footer = () => {
       </h6>
     </footer>
   );
-};
+}
 
 const links = [
   {

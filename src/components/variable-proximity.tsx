@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   forwardRef,
   useMemo,
@@ -6,6 +7,7 @@ import {
   MutableRefObject,
   CSSProperties,
   HTMLAttributes,
+  RefObject,
 } from "react";
 import { motion } from "framer-motion";
 
@@ -22,7 +24,7 @@ function useAnimationFrame(callback: () => void) {
 }
 
 function useMousePositionRef(
-  containerRef: MutableRefObject<HTMLElement | null>
+  containerRef: RefObject<any | null>
 ) {
   const positionRef = useRef({ x: 0, y: 0 });
 
@@ -58,7 +60,7 @@ interface VariableProximityProps extends HTMLAttributes<HTMLSpanElement> {
   label: string;
   fromFontVariationSettings: string;
   toFontVariationSettings: string;
-  containerRef: MutableRefObject<HTMLElement | null>;
+  containerRef: any;
   radius?: number;
   falloff?: "linear" | "exponential" | "gaussian";
   className?: string;

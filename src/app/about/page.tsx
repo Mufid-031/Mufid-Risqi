@@ -10,7 +10,6 @@ import { Skills } from "@/components/about/skills";
 import { Certificate } from "@/components/about/certificate";
 import { Background } from "@/components/background";
 import DomeGallery from "@/components/dome-gallery";
-import { Footer } from "@/components/footer";
 
 export default function About() {
   const { theme } = useTheme();
@@ -32,7 +31,6 @@ export default function About() {
           grayscale={true}
         />
       </div>
-      <Footer />
     </div>
   );
 }

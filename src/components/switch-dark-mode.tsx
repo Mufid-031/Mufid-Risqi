@@ -1,12 +1,14 @@
 "use client";
 
 import React from "react";
+import { MoonIcon, SunIcon } from "lucide-react";
+
+import { Button } from "./ui/button";
+
 import {
   ReactThemeSwitchAnimationProps,
   useModeAnimation,
-} from "@/hooks/use-animation-mode";
-import { MoonIcon, SunIcon } from "lucide-react";
-import { Button } from "./ui/button";
+} from "@/hooks/useAnimationMode";
 import { cn } from "@/lib/utils";
 
 export interface SwitchDarkModeProps extends ReactThemeSwitchAnimationProps {

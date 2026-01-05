@@ -1,15 +1,13 @@
 "use client";
 
-import { Inter } from "next/font/google";
 import "./globals.css";
-import ThemeProvider from "@/components/theme-provider";
-import { Header } from "@/components/header";
-import { BottomNav } from "@/components/bottom-nav";
-import { AnimatePresence } from "framer-motion";
-import Preloader from "@/components/preloader";
-import { GridBackground } from "@/components/grid-background";
+import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
-import { TransitionPageProvider } from "@/contexts/transition-page-context";
+import { AnimatePresence } from "framer-motion";
+
+import Preloader from "@/components/preloader";
+import Layout from "@/components/layout/Layout";
+import { GridBackground } from "@/components/grid-background";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -88,27 +86,13 @@ export default function RootLayout({
       </head>
 
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <TransitionPageProvider>
-            <Header />
-
-            {/* Preloader & GridBackground hanya render sekali */}
-            <AnimatePresence>{isLoading && <Preloader />}</AnimatePresence>
-            <AnimatePresence>
-              {showGridBackground && <GridBackground />}
-            </AnimatePresence>
-
-            {/* Konten halaman */}
-            {isContentVisible && children}
-
-            <BottomNav />
-          </TransitionPageProvider>
-        </ThemeProvider>
+        <Layout>
+          <AnimatePresence>{isLoading && <Preloader />}</AnimatePresence>
+          <AnimatePresence>
+            {showGridBackground && <GridBackground />}
+          </AnimatePresence>
+          {isContentVisible && children}
+        </Layout>
       </body>
     </html>
   );

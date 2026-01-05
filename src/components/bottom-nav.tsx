@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import {
   CalendarIcon,
   Code2Icon,
@@ -9,22 +10,23 @@ import {
   UserIcon,
 } from "lucide-react";
 import Link from "next/link";
-import React from "react";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
+import { useTheme } from "next-themes";
+import { useRouter } from "next/navigation";
+
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
-import { Dock, DockIcon } from "@/components/ui/dock";
 import SwitchDarkMode from "./switch-dark-mode";
-import { ThemeAnimationType } from "@/hooks/use-animation-mode";
-import { useTheme } from "next-themes";
+import { Separator } from "@/components/ui/separator";
+import { Dock, DockIcon } from "@/components/ui/dock";
+import { Button, buttonVariants } from "@/components/ui/button";
+
+import { cn } from "@/lib/utils";
+import { ThemeAnimationType } from "@/hooks/useAnimationMode";
 import { useTransitionPage } from "@/contexts/transition-page-context";
-import { useRouter } from "next/navigation";
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 

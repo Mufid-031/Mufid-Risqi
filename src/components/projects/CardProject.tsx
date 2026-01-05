@@ -1,12 +1,14 @@
+"use client";
+
 import Image from "next/image";
-import { motion, MotionProps } from "framer-motion";
+import { motion, MotionProps, Transition } from "framer-motion";
 
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import Magnetic from "../common/magnetic";
 import { Card, CardContent, CardFooter } from "../ui/card";
 
-interface ProjectCard extends MotionProps {
+interface CardProject extends MotionProps {
   id: string;
   title: string;
   description: string;
@@ -17,7 +19,14 @@ interface ProjectCard extends MotionProps {
   onClick?: () => void;
 }
 
-export const ProjectCard = ({
+export const transitionAnimation: Transition = {
+  duration: 0.5,
+  type: "spring",
+  stiffness: 100,
+  damping: 20,
+};
+
+export const CardProject = ({
   id,
   title,
   description,
@@ -27,9 +36,24 @@ export const ProjectCard = ({
   demoLink,
   onClick,
   ...props
-}: ProjectCard) => {
+}: CardProject) => {
   return (
-    <motion.div layoutId={`card-${title}-${id}`} onClick={onClick} {...props}>
+    <motion.div
+      layoutId={`card-${title}-${id}`}
+      onClick={onClick}
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{
+        opacity: 1,
+        scale: 1,
+        transition: transitionAnimation,
+      }}
+      exit={{
+        opacity: 0,
+        scale: 0,
+        transition: transitionAnimation,
+      }}
+      {...props}
+    >
       <Magnetic magnetStrength={20}>
         <Card className="max-w-sm bg-transparent z-1 overflow-hidden pt-0">
           <motion.div

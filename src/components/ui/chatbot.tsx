@@ -17,7 +17,7 @@ import { Card } from "./card";
 import { Input } from "./input";
 import { ScrollArea } from "./scroll-area";
 import { Avatar } from "./avatar";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/useMobile";
 import dynamic from "next/dynamic";
 
 const ClientTimeAgo = dynamic(() => import("react-timeago"), {
